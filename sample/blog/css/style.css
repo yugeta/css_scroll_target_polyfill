@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100vh;
+  padding: 24px;
+  border-right: 1px solid var(--color-border);
+}
+
+.list {
+  scroll-target-group: auto;
+  display: grid;
+  gap: 12px;
+
+  /* スクロール通過ずみ: 薄いグレー */
+  a:target-before {
+    color: #999;
+  }
+
+  /* 現在表示中: 強調表示 */
+  a:target-current {
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  /* スクロール未到達: 濃いグレー */
+  a:target-after {
+    color: #333;
+  }
+}
+
+.main {
+  margin-left: 150px;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.section__title {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
