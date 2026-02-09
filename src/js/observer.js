@@ -46,6 +46,8 @@ export class Observer extends Util{
     const all_elements = document.querySelectorAll(`[${this.attribute_name}]`)
     for(const elm of all_elements){
       const hash = elm.getAttribute("href")
+      if(!hash){continue}
+      console.log(hash)
       datas.push({
         link_target : elm,
         pos_target : document.querySelector(hash),
