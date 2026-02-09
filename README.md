@@ -25,4 +25,6 @@ Author : Yugeta.Koji
 # 処理手順
 1. 対象のcssの存在確認
 
+# Demo
+> https://yugeta.github.io/css_scroll_target_polyfill/sample/test/
 
