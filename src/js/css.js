@@ -14,10 +14,6 @@ export class Css extends Util{
     if(!value || !this.has_targets(value)){return}
     value = this.remove_comments(value)
 
-    // this.target_group = this.get_target_group(value)
-    // console.log(this.target_group)
-    // if(!this.target_group){return}
-
     const datas = this.get_targets(value)
     this.set_targets(datas)  
   }
@@ -47,6 +43,7 @@ export class Css extends Util{
 
   // css文字列内から、@importを取得して、ファイル読み込み文字列と置き換える処理
   async get_imports(base_path, value){
+    if(!value || !value.match(/@import/)){return value}
     const base_url = this.get_base_url(base_path)
     const imports = value.matchAll(/@import\s+["']([^"']+)["'];/g)
     if(imports){
@@ -123,30 +120,4 @@ export class Css extends Util{
       elm.setAttribute(this.attribute_name, "")
     }
   }
-
-  // // target-groupを取得
-  // get_target_group(value){
-  //   // const mat = value.match(/scroll-target-group.*?:(.+?);/)
-  //   // const reg = new RegExp(
-  //   //   `(^|})\\s*([^{}]+)\\s*{.*?scroll-target-group.*?:(.+?);.*?}`
-  //   // );
-  //   // const mat = value.match(/(^|})\\s*([^{}]+)\\s*{.*?scroll-target-group.*?:(.+?);.*?}/)
-  //   const matches = value.matchAll(/([^{}]+)\{[^{}]*scroll-target-group\s*:\s*([^;]+);/g)
-  //   const datas = []
-  //   for(const match of matches){
-  //     const selector = match[1].trim()
-  //     if(!selector){continue}
-  //     const scroll_target_group = match[2].trim()
-  //     if(scroll_target_group !== "auto"){continue}
-  //     // datas.push({
-  //     //   selector : selector,
-  //     //   scroll_target_group : match[2].trim()
-  //     // })
-  //     const elms = document.querySelectorAll(selector)
-  //     for(const elm of elms){
-  //       datas.push(elm)
-  //     }
-  //   }
-  //   return datas
-  // }
 }
