@@ -1,0 +1,53 @@
+ul {
+  --item-size : 80%;
+  --gap-size : 1.0em;
+
+  display: flex;
+  gap: var(--gap-size);
+
+  /* padding-inline: calc((100% - var(--item-size)) / 2); */
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  width:80%;
+  margin:20px auto;
+  padding:0;
+  border:1px solid black;
+
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-inline: calc((100% - var(--item-size)) / 2);
+  /* scroll-padding-inline: calc(var(--item-size) / 2); */
+}
+ul::-webkit-scrollbar {
+    display: none;
+}
+
+li {
+  list-style-type: none;
+  background-color: #eeeeee;
+
+  height: 100px;
+  padding-top: 20px;
+  scroll-snap-align: start;
+  text-align: center;
+
+  flex: 0 0 var(--item-size);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+
+  /* scroll-margin-inline: calc(var(--item-size)); */
+  scroll-margin-inline: 1.0em;
+}
+
+/* li:target {
+  /* ターゲットになった瞬間だけ少し変化を与える * /
+  scroll-snap-align: center;
+  /* Safariが再計算するように微小な変形を加える * /
+  transform: scale(1.0001); 
+} */

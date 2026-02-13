@@ -1,6 +1,8 @@
 
 
 export class Util{
+  css_value = null
+
   get attribute_name(){
     return "css-polyfill-target"
   }
@@ -20,7 +22,7 @@ export class Util{
     return sp[2] === location.host ? true : false
   }
 
-  // target処理が含まれているかチェック
+  // cssにtarget処理が含まれているかチェック
   has_targets(value){
     if(value.match(/:target-before|:target-current|:target-after/)){
       return true
@@ -28,6 +30,11 @@ export class Util{
     else{
       return false
     }
+  }
+
+  // ::scroll-marker-groupの存在確認
+  has_scroll_marker_group(value){
+
   }
 
   // 対象URLから、base_url(dir)を取得
@@ -46,11 +53,51 @@ export class Util{
     return value
   }
 
-  // 
+  // ページ内のスタイルシート全部の詩取得
   get_stylesheet(){
     const style = document.createElement("style");
     style.setAttribute("data-target-polyfill", "true");
     document.head.appendChild(style);
     return style.sheet;
+  }
+
+  get_scroll_direction(targets){
+    if(!targets || !targets.length || targets.length < 2){
+       return 'vertical'; 
+    }
+
+    const firstRect  = targets[0].pos_target.getBoundingClientRect();
+    const secondRect = targets[1].pos_target.getBoundingClientRect();
+
+    // X軸（横）の距離とY軸（縦）の距離を計算
+    const deltaX = Math.abs(secondRect.left - firstRect.left);
+    const deltaY = Math.abs(secondRect.top - firstRect.top);
+
+    // 縦の移動距離の方が大きければvertical、そうでなければhorizontal
+    return deltaY > deltaX ? 'vertical' : 'horizontal';
+  }
+
+  // scrollコンテナの取得
+  get_scroll_container(elm){
+    let parent = elm.parentElement;
+
+    while (parent) {
+      const style = getComputedStyle(parent);
+      const overflowX = style.overflowX;
+      const overflowY = style.overflowY;
+
+      const isScrollable =
+        /(auto|scroll|overlay)/.test(overflowX + overflowY);
+
+      if (isScrollable &&
+          (parent.scrollWidth > parent.clientWidth ||
+          parent.scrollHeight > parent.clientHeight)) {
+        return parent;
+      }
+
+      parent = parent.parentElement;
+    }
+
+    return document.scrollingElement; // 最終フォールバック
   }
 }

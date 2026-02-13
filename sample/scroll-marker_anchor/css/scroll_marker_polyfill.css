@@ -1,0 +1,25 @@
+ul + .scroll-marker-group {
+  /* position:absolute; */
+  display:flex;
+  gap: 0.4em;
+  place-content: center;
+  top:100%;
+  left:50%;
+  transform:translate(+1.0em, -50%);
+
+  scroll-target-group : auto;
+}
+
+ul + .scroll-marker-group > *{
+  display:block;
+  border: 1px solid black;
+  height: 0.5em;
+  width: 0.5em;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+ul + .scroll-marker-group > *:target-current {
+  background: black;
+}
+

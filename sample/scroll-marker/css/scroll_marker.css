@@ -1,0 +1,21 @@
+ul{
+  scroll-marker-group: after;
+}
+
+li::scroll-marker {
+  content: "";
+  border: 1px solid black;
+  height: 0.5em;
+  width: 0.5em;
+  border-radius:50%;
+}
+
+::scroll-marker-group {
+  display: flex;
+  gap: 0.4em;
+  place-content: center;
+}
+
+::scroll-marker:target-current {
+  background: black;
+}

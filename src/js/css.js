@@ -7,12 +7,12 @@ export class Css extends Util{
 
   // 初期化処理
   async init(){
-    
     let value = ""
     value += await this.get_style_value()
     value += await this.get_link_value()
     if(!value || !this.has_targets(value)){return}
     value = this.remove_comments(value)
+    this.css_value = value
 
     const datas = this.get_targets(value)
     this.set_targets(datas)  

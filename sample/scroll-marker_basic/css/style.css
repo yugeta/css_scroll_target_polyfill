@@ -1,0 +1,17 @@
+@import "carousel.css";
+@import "scroll_marker_polyfill.css";
+
+html,body{
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  width:100%;
+  height:100%;
+}
+*, *:before, *:after {
+  -webkit-box-sizing  : border-box;
+     -moz-box-sizing  : border-box;
+       -o-box-sizing  : border-box;
+      -ms-box-sizing  : border-box;
+          box-sizing  : border-box;
+}

@@ -1,6 +1,8 @@
-import { Util } from "./util.js"
+import { Util }     from "./util.js"
 import { Css }      from "./css.js"
-import { Observer } from "./observer.js"
+import { Observer } from "./target/observer.js"
+import { Group }    from "./marker/group.js"
+import { Anchor }   from "./anchor.js"
 
 class Main extends Util{
   constructor(){
@@ -13,6 +15,8 @@ class Main extends Util{
   async init(){
     await new Css().init()
     await new Observer().init()
+    await new Group().init()
+    await new Anchor().init()
   }
 }
 
