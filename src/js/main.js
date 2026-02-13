@@ -14,6 +14,7 @@ class Main extends Util{
 
   async init(){
     await new Css().init()
+    new Util()
     await new Observer().init()
     await new Group().init()
     await new Anchor().init()

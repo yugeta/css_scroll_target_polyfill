@@ -37,19 +37,10 @@ export class Anchor extends Util{
     if (!target) {return}
     e.preventDefault(); // デフォルトの挙動を抑制
 
-    const scroller = this.get_scroll_container(target)
-    if(!scroller){return}
-
-    scroller.addEventListener('scrollend', this.scroll_end.bind(this), { once: true });
-
     target.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
       inline: 'center' // 中央にスナップさせる
     });
-  }
-
-  scroll_end(){
-    new Observer().update()
   }
 }

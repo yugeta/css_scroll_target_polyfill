@@ -1,6 +1,34 @@
 
 
 export class Util{
+  constructor(){
+    const [targets, parents] = this.get_target_elements()
+    this.targets = targets
+    this.parents = parents
+  }
+
+  get_target_elements(){
+    const targets = []
+    const parents = []
+    const all_elements = document.querySelectorAll(`[${this.attribute_name}]`)
+    for(const elm of all_elements){
+      const hash = elm.getAttribute("href")
+      if(!hash){continue}
+      const target   = document.querySelector(hash)
+      const scroller = this.get_scroll_container(target)
+      targets.push({
+        link_target : elm,
+        pos_target  : target,
+        hash        : hash,
+        scroller    : scroller,
+      })
+      if(!parents.find(e => e === scroller)){
+        parents.push(scroller)
+      }
+    }
+    return [targets, parents]
+  }
+
   css_value = null
 
   get attribute_name(){
@@ -86,8 +114,7 @@ export class Util{
       const overflowX = style.overflowX;
       const overflowY = style.overflowY;
 
-      const isScrollable =
-        /(auto|scroll|overlay)/.test(overflowX + overflowY);
+      const isScrollable = /(auto|scroll|overlay)/.test(overflowX + overflowY);
 
       if (isScrollable &&
           (parent.scrollWidth > parent.clientWidth ||
@@ -97,7 +124,7 @@ export class Util{
 
       parent = parent.parentElement;
     }
-
-    return document.scrollingElement; // 最終フォールバック
+    const final = document.scrollingElement; // 最終フォールバック
+    return final.tagName === "HTML" ? window : final
   }
 }
